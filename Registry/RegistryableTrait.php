@@ -25,6 +25,8 @@
  */
 namespace Thuata\ComponentBundle\Registry;
 
+use Thuata\FrameworkBundle\Factory\Factorable\FactorableInterface;
+
 /**
  * Description of RegistryableTrait
  *
@@ -42,7 +44,7 @@ trait RegistryableTrait
      * 
      * @param string $className
      * 
-     * @return Factorable\FactorableInterface|null
+     * @return FactorableInterface|null
      */
     protected function loadFromRegistry($className)
     {
