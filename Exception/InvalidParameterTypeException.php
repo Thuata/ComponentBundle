@@ -23,16 +23,32 @@
  * THE SOFTWARE.
  */
 
-namespace thuata\componentbundle\Exception;
+namespace Thuata\ComponentBundle\Exception;
 
 /**
  * Class InvalidParameterTypeException
  *
- * @package thuata\componentbundle\Exception
+ * @package Thuata\ComponentBundle\Exception
  *
  * @author Anthony Maudry <anthony.maudry@thuata.com>
  */
-class InvalidParameterTypeException
-{
 
+class InvalidParameterTypeException extends \Exception
+{
+    const MESSAGE_FORMAT = 'Invalid type specified for parameter number %d of method "%s::%s". "%s" expected, got "%s".';
+    const ERROR_CODE = 500;
+
+    /**
+     * InvalidParameterTypeException constructor.
+     *
+     * @param string $class
+     * @param int    $method
+     * @param int    $position
+     * @param string $expected
+     * @param string $provided
+     */
+    public function __construct($class, $method, $position, $expected, $provided)
+    {
+        parent::__construct(sprintf(self::MESSAGE_FORMAT, $position, $class, $method, $expected, $provided), self::ERROR_CODE);
+    }
 }

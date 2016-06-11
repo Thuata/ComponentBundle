@@ -25,8 +25,6 @@
  */
 namespace Thuata\ComponentBundle\Registry;
 
-use Thuata\FrameworkBundle\Factory\Factorable\FactorableInterface;
-
 /**
  * Description of RegistryableTrait
  *
@@ -38,26 +36,28 @@ trait RegistryableTrait
      * @var array
      */
     private $registry = [];
-    
+
     /**
-     * Loads a factorable from registry
-     * 
+     * Loads an object instance from registry
+     *
      * @param string $className
-     * 
-     * @return FactorableInterface|null
+     *
+     * @return mixed
      */
     protected function loadFromRegistry($className)
     {
         return array_key_exists($className, $this->registry) ? $this->registry[$className] : null;
     }
-    
+
     /**
-     * Adds the factorable to registry
-     * 
-     * @param mixed $instance
+     * Adds an object instance to registry
+     *
+     * @param mixed       $instance
+     * @param string|null $className
      */
-    protected function addToRegistry($instance)
+    protected function addToRegistry($instance, $className = null)
     {
-        $this->registry[get_class($instance)] = $instance;
+        is_null($className) and $className = get_class($instance);
+        $this->registry[$className] = $instance;
     }
 }
