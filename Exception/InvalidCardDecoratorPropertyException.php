@@ -23,21 +23,27 @@
  * THE SOFTWARE.
  */
 
-namespace Thuata\ComponentBundle\Display;
+namespace Thuata\ComponentBundle\Exception;
 
 /**
- * Interface CardDecoratedInterface
+ * Class InvalidCardDecoratorProperty
  *
- * @package thuata\componentbundle\Display
+ * @package Thuata\ComponentBundle\Exception
  *
- * @author Anthony Maudry <anthony.maudry@thuata.com>
+ * @author  Anthony Maudry <anthony.maudry@thuata.com>
  */
-interface CardDecoratedInterface
+class InvalidCardDecoratorPropertyException extends \Exception
 {
+    const MESSAGE_FORMAT = 'Property "%s" was not found in card decorator "%s"';
+
     /**
-     * Gets the card decorator
+     * InvalidCardDecoratorPropertyException constructor.
      *
-     * @return CardInterface
+     * @param string $decorator
+     * @param int    $property
      */
-    public function getCardDecorator();
+    public function __construct($decorator, $property)
+    {
+        parent::__construct(sprintf(self::MESSAGE_FORMAT, $property, get_class($decorator)));
+    }
 }

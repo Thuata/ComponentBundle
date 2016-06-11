@@ -30,7 +30,7 @@ namespace Thuata\ComponentBundle\Exception;
  *
  * @package Thuata\ComponentBundle\Exception
  *
- * @author Anthony Maudry <anthony.maudry@thuata.com>
+ * @author  Anthony Maudry <anthony.maudry@thuata.com>
  */
 
 class InvalidParameterTypeException extends \Exception
@@ -42,7 +42,7 @@ class InvalidParameterTypeException extends \Exception
      * InvalidParameterTypeException constructor.
      *
      * @param string $class
-     * @param int    $method
+     * @param string $method
      * @param int    $position
      * @param string $expected
      * @param string $provided
