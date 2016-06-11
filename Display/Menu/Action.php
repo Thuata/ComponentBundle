@@ -23,51 +23,74 @@
  * THE SOFTWARE.
  */
 
-namespace Thuata\ComponentBundle\SoftDelete;
+namespace Thuata\ComponentBundle\Display\Menu;
 
+use Symfony\Component\HttpFoundation\ParameterBag;
 use Thuata\ComponentBundle\Exception\InvalidParameterTypeException;
 
 /**
- * Class SoftDeletableTrait
+ * Class Action
  *
- * @package thuata\componentbundle\SoftDelete
+ * @package Thuata\ComponentBundle\Display\Menu
  *
  * @author Anthony Maudry <anthony.maudry@thuata.com>
  */
-trait SoftDeletableTrait
+class Action
 {
     /**
-     * @var boolean
+     * @var ParameterBag
      */
-    private $deleted;
+    private $parameters;
 
     /**
-     * Gets if instance is deleted
-     *
-     * @return bool
+     * Action constructor.
      */
-    public function isDeleted()
+    public function __construct()
     {
-        return $this->deleted;
+        $this->parameters = new ParameterBag();
     }
 
     /**
-     * Sets Instance to deleted or not deleted
+     * Adds a parameter
      *
-     * @param boolean $deleted
+     * @param string $name
+     * @param mixed  $value
      *
-     * @return \Thuata\ComponentBundle\SoftDelete\SoftDeleteInterface
+     * @return $this
      *
      * @throws \Thuata\ComponentBundle\Exception\InvalidParameterTypeException
      */
-    public function setDeleted($deleted)
+    public function addParameter($name, $value)
     {
-        if(!is_bool($deleted)) {
-            throw new InvalidParameterTypeException(get_class($this), __METHOD__, 1, 'boolean', gettype($deleted));
+        if (!is_string($name)) {
+            throw new InvalidParameterTypeException(__CLASS__, __METHOD__, 1, 'string', gettype($name));
+        }
+        if (!is_scalar($value)) {
+            throw new InvalidParameterTypeException(__CLASS__, __METHOD__, 1, 'scalar', gettype($value));
         }
 
-        $this->deleted = $deleted;
+        $this->parameters->set($name, $value);
 
         return $this;
+    }
+
+    /**
+     * Gets the parameters
+     *
+     * @return ParameterBag
+     */
+    public function getParameters()
+    {
+        return $this->parameters;
+    }
+
+    /**
+     * Create a new Item instance
+     *
+     * @return Action
+     */
+    public static function create()
+    {
+        return new self();
     }
 }

@@ -23,50 +23,78 @@
  * THE SOFTWARE.
  */
 
-namespace Thuata\ComponentBundle\SoftDelete;
-
-use Thuata\ComponentBundle\Exception\InvalidParameterTypeException;
+namespace Thuata\ComponentBundle\Display\Menu;
 
 /**
- * Class SoftDeletableTrait
+ * Class Menu
  *
- * @package thuata\componentbundle\SoftDelete
+ * @package Thuata\ComponentBundle\Display\Menu
  *
- * @author Anthony Maudry <anthony.maudry@thuata.com>
+ * @author  Anthony Maudry <anthony.maudry@thuata.com>
  */
-trait SoftDeletableTrait
+class Menu
 {
     /**
-     * @var boolean
+     * @var Item
      */
-    private $deleted;
+    private $root;
 
     /**
-     * Gets if instance is deleted
-     *
-     * @return bool
+     * @var string
      */
-    public function isDeleted()
+    private $name;
+
+    /**
+     * Menu constructor.
+     */
+    public function __construct()
     {
-        return $this->deleted;
     }
 
     /**
-     * Sets Instance to deleted or not deleted
+     * Gets the root item
      *
-     * @param boolean $deleted
-     *
-     * @return \Thuata\ComponentBundle\SoftDelete\SoftDeleteInterface
-     *
-     * @throws \Thuata\ComponentBundle\Exception\InvalidParameterTypeException
+     * @return \Thuata\ComponentBundle\Display\Menu\Item
      */
-    public function setDeleted($deleted)
+    public function getRoot()
     {
-        if(!is_bool($deleted)) {
-            throw new InvalidParameterTypeException(get_class($this), __METHOD__, 1, 'boolean', gettype($deleted));
-        }
+        return $this->root;
+    }
 
-        $this->deleted = $deleted;
+    /**
+     * Sets the root item
+     *
+     * @param \Thuata\ComponentBundle\Display\Menu\Item $root
+     *
+     * @return Menu
+     */
+    public function setRoot($root)
+    {
+        $this->root = $root;
+
+        return $this;
+    }
+
+    /**
+     * Gets the name
+     *
+     * @return string
+     */
+    public function getName()
+    {
+        return $this->name;
+    }
+
+    /**
+     * Sets the name
+     *
+     * @param string $name
+     *
+     * @return Menu
+     */
+    public function setName($name)
+    {
+        $this->name = $name;
 
         return $this;
     }
