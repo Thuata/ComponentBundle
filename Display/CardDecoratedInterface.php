@@ -23,51 +23,21 @@
  * THE SOFTWARE.
  */
 
-namespace Thuata\ComponentBundle\SoftDelete;
-
-use Thuata\ComponentBundle\Exception\InvalidParameterTypeException;
+namespace Thuata\ComponentBundle\Display;
 
 /**
- * Class SoftDeletableTrait
+ * Interface CardDecoratedInterface
  *
- * @package thuata\componentbundle\SoftDelete
+ * @package thuata\componentbundle\Display
  *
  * @author Anthony Maudry <anthony.maudry@thuata.com>
  */
-trait SoftDeletableTrait
+interface CardDecoratedInterface
 {
     /**
-     * @var boolean
+     * @param $decorated
+     *
+     * @return CardInterface
      */
-    private $deleted;
-
-    /**
-     * Gets if instance is deleted
-     *
-     * @return bool
-     */
-    public function isDeleted()
-    {
-        return $this->deleted;
-    }
-
-    /**
-     * Sets Instance to deleted or not deleted
-     *
-     * @param boolean $deleted
-     *
-     * @return \Thuata\ComponentBundle\SoftDelete\SoftDeleteInterface
-     *
-     * @throws \Thuata\ComponentBundle\Exception\InvalidParameterTypeException
-     */
-    public function setDeleted($deleted)
-    {
-        if(!is_bool($deleted)) {
-            throw new InvalidParameterTypeException(get_class($this), __METHOD__, 1, 'boolean', gettype($deleted));
-        }
-
-        $this->deleted = $deleted;
-
-        return $this;
-    }
+    public function getCardDecorator($decorated);
 }

@@ -23,51 +23,51 @@
  * THE SOFTWARE.
  */
 
-namespace Thuata\ComponentBundle\SoftDelete;
+namespace Thuata\ComponentBundle\Display;
 
-use Thuata\ComponentBundle\Exception\InvalidParameterTypeException;
+use Thuata\ComponentBundle\Display\Menu\Menu;
 
 /**
- * Class SoftDeletableTrait
+ * interface CardDecoratorInterface
  *
- * @package thuata\componentbundle\SoftDelete
+ * @package thuata\componentbundle\Display
  *
  * @author Anthony Maudry <anthony.maudry@thuata.com>
  */
-trait SoftDeletableTrait
+interface CardInterface
 {
     /**
-     * @var boolean
+     * Gets the path (relative to web root) to the card picture
+     *
+     * @return string
      */
-    private $deleted;
+    public function getPicture();
 
     /**
-     * Gets if instance is deleted
+     * Gets the card title
      *
-     * @return bool
+     * @return string
      */
-    public function isDeleted()
-    {
-        return $this->deleted;
-    }
+    public function getTitle();
 
     /**
-     * Sets Instance to deleted or not deleted
+     * Gets the card HTML content
      *
-     * @param boolean $deleted
-     *
-     * @return \Thuata\ComponentBundle\SoftDelete\SoftDeleteInterface
-     *
-     * @throws \Thuata\ComponentBundle\Exception\InvalidParameterTypeException
+     * @return string
      */
-    public function setDeleted($deleted)
-    {
-        if(!is_bool($deleted)) {
-            throw new InvalidParameterTypeException(get_class($this), __METHOD__, 1, 'boolean', gettype($deleted));
-        }
+    public function getContent();
 
-        $this->deleted = $deleted;
+    /**
+     * Gets the administration menu
+     *
+     * @return Menu
+     */
+    public function getAdministrationMenu();
 
-        return $this;
-    }
+    /**
+     * Returns the link to navigate to when clicking on the card
+     *
+     * @return string
+     */
+    public function getLink();
 }
