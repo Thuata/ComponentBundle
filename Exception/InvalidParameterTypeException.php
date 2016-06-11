@@ -1,5 +1,4 @@
 <?php
-
 /*
  * The MIT License
  *
@@ -24,17 +23,32 @@
  * THE SOFTWARE.
  */
 
+namespace Thuata\ComponentBundle\Exception;
+
 /**
- * AclAccessibleInterface. Provides methods for objects with access limited to some acl roles
+ * Class InvalidParameterTypeException
+ *
+ * @package Thuata\ComponentBundle\Exception
  *
  * @author Anthony Maudry <anthony.maudry@thuata.com>
  */
-interface AclAccessibleInterface
+
+class InvalidParameterTypeException extends \Exception
 {
+    const MESSAGE_FORMAT = 'Invalid type spcified for parametter number %d of method "%s::%s". "%s" expected, got "%s".';
+    const ERROR_CODE = 500;
+
     /**
-     * Returns the accessible roles
-     * 
-     * @return integer
+     * InvalidParameterTypeException constructor.
+     *
+     * @param string $class
+     * @param int    $method
+     * @param int    $position
+     * @param string $expected
+     * @param string $provided
      */
-    public function getAllowedRoles();
+    public function __construct($class, $method, $position, $expected, $provided)
+    {
+        parent::__construct(sprintf(self::MESSAGE_FORMAT, $position, $class, $method, $expected, $provided), self::ERROR_CODE);
+    }
 }
