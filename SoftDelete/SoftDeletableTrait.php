@@ -1,5 +1,4 @@
 <?php
-
 /*
  * The MIT License
  *
@@ -24,17 +23,49 @@
  * THE SOFTWARE.
  */
 
+namespace Thuata\ComponentBundle\SoftDelete;
+
+use Thuata\ComponentBundle\Exception\InvalidParameterTypeException;
+
 /**
- * AclAccessibleInterface. Provides methods for objects with access limited to some acl roles
+ * Class SoftDeletableTrait
+ *
+ * @package thuata\componentbundle\SoftDelete
  *
  * @author Anthony Maudry <anthony.maudry@thuata.com>
  */
-interface AclAccessibleInterface
+trait SoftDeletableTrait
 {
     /**
-     * Returns the accessible roles
-     * 
-     * @return integer
+     * @var boolean
      */
-    public function getAllowedRoles();
+    private $deleted;
+
+    /**
+     * Gets if instance is deleted
+     *
+     * @return bool
+     */
+    public function isDeleted()
+    {
+        return $this->deleted;
+    }
+
+    /**
+     * Sets Instance to deleted or not deleted
+     *
+     * @param boolean $deleted
+     *
+     * @return \Thuata\ComponentBundle\SoftDelete\SoftDeleteInterface
+     *
+     * @throws \Thuata\ComponentBundle\Exception\InvalidParameterTypeException
+     */
+    public function setDeleted($deleted)
+    {
+        if(!is_bool($deleted)) {
+            throw new InvalidParameterTypeException(get_class($this), __METHOD__, 1, 'boolean', gettype($deleted));
+        }
+
+        $this->deleted = $deleted;
+    }
 }
