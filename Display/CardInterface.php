@@ -28,7 +28,13 @@ namespace Thuata\ComponentBundle\Display;
 use Thuata\ComponentBundle\Display\Menu\Menu;
 
 /**
- * interface CardDecoratorInterface
+ * interface <b>CardDecoratorInterface</b><br>
+ * Cards are an element that contain :<br>
+ * <ul><li>an icon or picture</li>
+ * <li>A title</li>
+ * <li>Some textual content (ie : description)</li>
+ * <li>A menu to administrate the decorated element</li>
+ * <li>A link to navigate to a more descriptive page for the decorated object</li></ul>
  *
  * @package thuata\componentbundle\Display
  *

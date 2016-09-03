@@ -1,0 +1,6 @@
+services:
+    thuata.extenion.component:
+        class: Thuata\ComponentBundle\Twig\ThuataComponentExtension
+        public: false
+        tags:
+            - { name: twig.extension }

@@ -26,7 +26,8 @@
 namespace Thuata\ComponentBundle\Exception;
 
 /**
- * Class InvalidParameterTypeException
+ * <b>InvalidParameterTypeException</b><br>
+ * To be thrown when a wrong parameter type is provided for a method
  *
  * @package Thuata\ComponentBundle\Exception
  *

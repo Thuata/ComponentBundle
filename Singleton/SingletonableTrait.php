@@ -26,7 +26,12 @@
 namespace Thuata\ComponentBundle\Singleton;
 
 /**
- * Trait for singleton
+ * <b>SingletonableTrait</b><br>
+ * Defines the get instance method for an object that implements the singleton interface
+ *
+ * @package Thuata\ComponentBundle\Singleton
+ *
+ * @author  Anthony Maudry <anthony.maudry@thuata.com>
  */
 trait SingletonableTrait
 {

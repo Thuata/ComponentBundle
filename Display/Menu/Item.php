@@ -26,7 +26,13 @@
 namespace Thuata\ComponentBundle\Display\Menu;
 
 /**
- * Class Item
+ * <b>Item<b><br/>
+ * Menu item. Descript en element from a menu to be displayed in a page.<br>
+ * An item has :
+ * <ul><li>A title</li>
+ * <li>an Action</li>
+ * <li>an icon</li>
+ * <li>Eventualy children (a list of items, the item is then a submenu itself</li></ul>
  *
  * @package Thuata\ComponentBundle\Display\Menu
  *

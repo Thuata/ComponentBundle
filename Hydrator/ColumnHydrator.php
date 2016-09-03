@@ -23,22 +23,26 @@
  * THE SOFTWARE.
  */
 
-namespace Thuata\ComponentBundle\Display;
+namespace Thuata\ComponentBundle\Hydrator;
+
+use Doctrine\ORM\Internal\Hydration\AbstractHydrator;
 
 /**
- * Interface <b>CardDecoratedInterface</b><br>
- * Provides method for an object to be decorated as a card
+ * <b>ColumnHydrator</b><br>
+ * Doctrine data hydrator that provides a single scalar column, ie : use it to get a list of ids
  *
- * @package thuata\componentbundle\Display
+ * @package thuata\componentbundle\Hydrator
  *
- * @author Anthony Maudry <anthony.maudry@thuata.com>
+ * @author  Anthony Maudry <anthony.maudry@thuata.com>
  */
-interface CardDecoratedInterface
+class ColumnHydrator extends AbstractHydrator
 {
+    const HYDRATOR_MODE = 'COLUMN_HYDRATOR';
     /**
-     * Gets the card decorator
-     *
-     * @return CardInterface
+     * {@inheritdoc}
      */
-    public function getCardDecorator();
+    protected function hydrateAllData()
+    {
+        return $this->_stmt->fetchAll(\PDO::FETCH_COLUMN);
+    }
 }

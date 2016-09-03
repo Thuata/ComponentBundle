@@ -29,7 +29,8 @@ use Symfony\Component\HttpFoundation\ParameterBag;
 use Thuata\ComponentBundle\Exception\InvalidParameterTypeException;
 
 /**
- * Class Action
+ * <b>Action</b><br>
+ * Action is the configuration of the behaviour when clicking on a menu item
  *
  * @package Thuata\ComponentBundle\Display\Menu
  *

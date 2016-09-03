@@ -26,7 +26,8 @@
 namespace Thuata\ComponentBundle\Exception;
 
 /**
- * Class InvalidCardDecoratorProperty
+ * <b>InvalidCardDecoratorProperty<b><br>
+ * Thrown when a card decorator does not provide a particular preperty
  *
  * @package Thuata\ComponentBundle\Exception
  *

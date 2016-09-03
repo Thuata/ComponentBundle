@@ -31,7 +31,8 @@ use Thuata\ComponentBundle\Exception\InvalidCardDecoratorPropertyException;
 use Thuata\ComponentBundle\Exception\InvalidParameterTypeException;
 
 /**
- * Class ThuataComponentExtension
+ * <b>ThuataComponentExtension</b><br>
+ * Provides twig extensions for the view components defined in the bundle
  *
  * @package Thuata\ComponentBundle\Twig
  *

@@ -1,0 +1,8 @@
+
+<ul>
+    {% for item in items %}
+        {{ include('ThuataComponentBundle:Menu:item.html.twig', {
+            'item' : item,
+        }) }}
+    {% endfor %}
+</ul>

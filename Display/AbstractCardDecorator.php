@@ -26,7 +26,10 @@
 namespace Thuata\ComponentBundle\Display;
 
 /**
- * Class AbstractCardDecorator
+ * <b>AbstractCardDecorator</b><br>
+ * Abstract class for cards to be displayed in a page.
+ *
+ * @see CardInterface for card description
  *
  * @package thuata\componentbundle\Display
  *

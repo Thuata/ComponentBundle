@@ -1,0 +1,7 @@
+<a
+{% for key, value in action.parameters.all %}
+    {{ key }}="{{ value }}"
+{% endfor %}
+    class="{{ classes }}"
+>
+</a>
