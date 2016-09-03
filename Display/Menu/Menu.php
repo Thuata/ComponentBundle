@@ -26,7 +26,11 @@
 namespace Thuata\ComponentBundle\Display\Menu;
 
 /**
- * Class Menu
+ * <b>Menu</b><br>
+ * A menu to be displayed in a page.<br>
+ * A menu is composed of a single item witch is the menu root. This item is never displayed but contains all items that
+ * are to be displayed.<br>
+ * The name of the menu allows it to be retrieved
  *
  * @package Thuata\ComponentBundle\Display\Menu
  *

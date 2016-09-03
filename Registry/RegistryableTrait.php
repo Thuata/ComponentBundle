@@ -26,7 +26,8 @@
 namespace Thuata\ComponentBundle\Registry;
 
 /**
- * Description of RegistryableTrait
+ * <b>RegistryableTrait</b><br>
+ * Trait to defined the methods defined in RegistryInterface for factories.
  *
  * @author Anthony Maudry <anthony.maudry@thuata.com>
  */
@@ -40,24 +41,24 @@ trait RegistryableTrait
     /**
      * Loads an object instance from registry
      *
-     * @param string $className
+     * @param string $key
      *
      * @return mixed
      */
-    protected function loadFromRegistry($className)
+    protected function loadFromRegistry($key)
     {
-        return array_key_exists($className, $this->registry) ? $this->registry[$className] : null;
+        return array_key_exists($key, $this->registry) ? $this->registry[$key] : null;
     }
 
     /**
      * Adds an object instance to registry
      *
-     * @param mixed       $instance
-     * @param string|null $className
+     * @param mixed       $data
+     * @param string|null $key
      */
-    protected function addToRegistry($instance, $className = null)
+    protected function addToRegistry($data, $key = null)
     {
-        is_null($className) and $className = get_class($instance);
-        $this->registry[$className] = $instance;
+        is_null($key) and $key = get_class($data);
+        $this->registry[$key] = $data;
     }
 }

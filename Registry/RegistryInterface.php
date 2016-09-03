@@ -23,15 +23,63 @@
  * THE SOFTWARE.
  */
 
-namespace thuata\componentbundle\Registry;
+namespace Thuata\ComponentBundle\Registry;
 
 /**
- * Class RegistryInterface
+ * <b>RegistryInterface</b><br>
+ *
  *
  * @package thuata\componentbundle\Registry
  *
  * @author Anthony Maudry <anthony.maudry@thuata.com>
  */
-class RegistryInterface
+interface RegistryInterface
 {
+    /**
+     * Finds an item by key
+     *
+     * @param mixed $key
+     *
+     * @return mixed
+     */
+    public function findByKey($key);
+
+    /**
+     * Finds a list of items by keys
+     *
+     * @param array $keys
+     *
+     * @return array
+     */
+    public function findByKeys(array $keys);
+
+    /**
+     * adds an item to the registry
+     *
+     *
+     * @param mixed $key
+     * @param mixed $data
+     *
+     * @return void
+     */
+    public function add($key, $data);
+
+    /**
+     * Removes an item
+     *
+     * @param mixed $key
+     *
+     * @return void
+     */
+    public function remove($key);
+
+    /**
+     *
+     *
+     * @param mixed $key
+     * @param mixed $data
+     *
+     * @return void
+     */
+    public function update($key, $data);
 }

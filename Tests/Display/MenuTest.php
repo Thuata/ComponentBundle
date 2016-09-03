@@ -23,22 +23,16 @@
  * THE SOFTWARE.
  */
 
-namespace Thuata\ComponentBundle\Display;
+namespace Thuata\ComponentBundle\Tests\Display;
 
 /**
- * Interface <b>CardDecoratedInterface</b><br>
- * Provides method for an object to be decorated as a card
+ * Class MenuTest
  *
- * @package thuata\componentbundle\Display
+ * @package Thuata\ComponentBundle\Tests\Display
  *
- * @author Anthony Maudry <anthony.maudry@thuata.com>
+ * @author  Anthony Maudry <anthony.maudry@thuata.com>
  */
-interface CardDecoratedInterface
+class MenuTest
 {
-    /**
-     * Gets the card decorator
-     *
-     * @return CardInterface
-     */
-    public function getCardDecorator();
+    
 }

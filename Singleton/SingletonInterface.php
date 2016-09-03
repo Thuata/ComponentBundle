@@ -26,9 +26,12 @@
 namespace Thuata\ComponentBundle\Singleton;
 
 /**
- * SingletonInterface definition
+ * <b>SingletonInterface</b><br>
+ * Interface for singletons. defines the method to get the singleton instance.
  *
- * @author Anthony Maudry <anthony.maudry@thuata.com>
+ * @package Thuata\ComponentBundle\Singleton
+ *
+ * @author  Anthony Maudry <anthony.maudry@thuata.com>
  */
 interface SingletonInterface
 {

@@ -1,0 +1,28 @@
+<div class="thuata-card {{ cardClass is defined ? cardClass : '' }}">
+    <figure>
+        <img src="{{ asset(card | card_display('picture')) }}">
+        <figcaption>{{ title }}</figcaption>
+    </figure>
+    {{ card | card_display('menu') }}
+    <nav>
+        <ul>
+            <li>
+                {{ card | card_display('action') | action_display }}
+            </li>
+            <li>
+                <i
+                        data-action="confirmation-popup"
+                        data-popup-url="/"
+                        class="button button-archive"
+                ></i>
+            </li>
+            <li>
+                <i
+                        data-action="confirmation-popup"
+                        data-popup-url="/"
+                        class="button button-delete button--disabled"
+                ></i>
+            </li>
+        </ul>
+    </nav>
+</div>

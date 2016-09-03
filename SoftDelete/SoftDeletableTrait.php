@@ -28,11 +28,12 @@ namespace Thuata\ComponentBundle\SoftDelete;
 use Thuata\ComponentBundle\Exception\InvalidParameterTypeException;
 
 /**
- * Class SoftDeletableTrait
+ * <b>SoftDeletableTrait</b><br>
+ * Provides the method definition for the SoftDeleteInterface.
  *
- * @package thuata\componentbundle\SoftDelete
+ * @package Thuata\ComponentBundle\SoftDelete
  *
- * @author Anthony Maudry <anthony.maudry@thuata.com>
+ * @author  Anthony Maudry <anthony.maudry@thuata.com>
  */
 trait SoftDeletableTrait
 {

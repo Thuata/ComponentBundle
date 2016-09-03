@@ -26,11 +26,13 @@
 namespace Thuata\ComponentBundle\SoftDelete;
 
 /**
- * Interface SoftDeleteInterface
+ * <b>SoftDeleteInterface</b><br>
+ * Interface for soft deletable entities. Soft deletable entities bear a property to set the entity deleted. Avoiding
+ * to permanently delete if from database.
  *
- * @package thuata\componentbundle\SoftDelete
+ * @package Thuata\ComponentBundle\SoftDelete
  *
- * @author Anthony Maudry <anthony.maudry@thuata.com>
+ * @author  Anthony Maudry <anthony.maudry@thuata.com>
  */
 interface SoftDeleteInterface
 {
