@@ -50,5 +50,5 @@ interface SoftDeleteInterface
      *
      * @return SoftDeleteInterface
      */
-    public function setDeleted($deleted);
+    public function setDeleted(bool $deleted);
 }

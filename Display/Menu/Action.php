@@ -61,11 +61,8 @@ class Action
      *
      * @throws \Thuata\ComponentBundle\Exception\InvalidParameterTypeException
      */
-    public function addParameter($name, $value)
+    public function addParameter(string $name, $value)
     {
-        if (!is_string($name)) {
-            throw new InvalidParameterTypeException(__CLASS__, __METHOD__, 1, 'string', gettype($name));
-        }
         if (!is_scalar($value)) {
             throw new InvalidParameterTypeException(__CLASS__, __METHOD__, 1, 'scalar', gettype($value));
         }

@@ -61,15 +61,11 @@ class ThuataComponentExtension extends \Twig_Extension
      * @throws \Thuata\ComponentBundle\Exception\InvalidCardDecoratorPropertyException
      * @throws \Thuata\ComponentBundle\Exception\InvalidParameterTypeException
      */
-    public function cardDisplayFilter(CardDecoratedInterface $object, $property)
+    public function cardDisplayFilter(CardDecoratedInterface $object, string $property)
     {
         $decorator = $object->getCardDecorator();
 
         $accessor = PropertyAccess::createPropertyAccessor();
-
-        if (is_string($property)) {
-            throw new InvalidParameterTypeException(__CLASS__, __METHOD__, 2, 'string', gettype($property));
-        }
 
         if (!$accessor->isReadable($decorator, $property)) {
             throw new InvalidCardDecoratorPropertyException($decorator, $property);

@@ -77,7 +77,7 @@ class Item
      *
      * @return Item
      */
-    public function setTitle($title)
+    public function setTitle(string $title)
     {
         $this->title = $title;
 
@@ -101,7 +101,7 @@ class Item
      *
      * @return Item
      */
-    public function setAction($action)
+    public function setAction(Action $action)
     {
         $this->action = $action;
 
@@ -125,7 +125,7 @@ class Item
      *
      * @return Item
      */
-    public function setIcon($icon)
+    public function setIcon(string $icon)
     {
         $this->icon = $icon;
 
@@ -149,7 +149,7 @@ class Item
      *
      * @return Item
      */
-    public function setChildren($children)
+    public function setChildren(\ArrayObject $children)
     {
         $this->children = $children;
 

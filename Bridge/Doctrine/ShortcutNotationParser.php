@@ -58,7 +58,7 @@ class ShortcutNotationParser
      *
      * @param $shortcut
      */
-    public function __construct($shortcut)
+    public function __construct(string $shortcut)
     {
         $this->shortcut = $shortcut;
         $this->parseNotation();

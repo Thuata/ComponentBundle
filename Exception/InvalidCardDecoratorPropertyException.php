@@ -41,9 +41,9 @@ class InvalidCardDecoratorPropertyException extends \Exception
      * InvalidCardDecoratorPropertyException constructor.
      *
      * @param string $decorator
-     * @param int    $property
+     * @param string $property
      */
-    public function __construct($decorator, $property)
+    public function __construct(string $decorator, string $property)
     {
         parent::__construct(sprintf(self::MESSAGE_FORMAT, $property, get_class($decorator)));
     }

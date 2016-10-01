@@ -48,7 +48,7 @@ class InvalidParameterTypeException extends \Exception
      * @param string $expected
      * @param string $provided
      */
-    public function __construct($class, $method, $position, $expected, $provided)
+    public function __construct(string $class, string $method, int $position, string $expected, string $provided)
     {
         parent::__construct(sprintf(self::MESSAGE_FORMAT, $position, $class, $method, $expected, $provided), self::ERROR_CODE);
     }

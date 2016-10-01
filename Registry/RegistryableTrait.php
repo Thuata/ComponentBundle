@@ -45,7 +45,7 @@ trait RegistryableTrait
      *
      * @return mixed
      */
-    protected function loadFromRegistry($key)
+    protected function loadFromRegistry(string $key)
     {
         return array_key_exists($key, $this->registry) ? $this->registry[$key] : null;
     }
@@ -56,7 +56,7 @@ trait RegistryableTrait
      * @param mixed       $data
      * @param string|null $key
      */
-    protected function addToRegistry($data, $key = null)
+    protected function addToRegistry($data, string $key = null)
     {
         is_null($key) and $key = get_class($data);
         $this->registry[$key] = $data;
