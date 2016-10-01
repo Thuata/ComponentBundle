@@ -72,7 +72,7 @@ class Menu
      *
      * @return Menu
      */
-    public function setRoot($root)
+    public function setRoot(Item $root)
     {
         $this->root = $root;
 

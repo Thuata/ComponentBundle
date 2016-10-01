@@ -61,7 +61,7 @@ trait SoftDeletableTrait
      *
      * @throws \Thuata\ComponentBundle\Exception\InvalidParameterTypeException
      */
-    public function setDeleted($deleted)
+    public function setDeleted(bool $deleted)
     {
         if(!is_bool($deleted)) {
             throw new InvalidParameterTypeException(get_class($this), __METHOD__, 1, 'boolean', gettype($deleted));
