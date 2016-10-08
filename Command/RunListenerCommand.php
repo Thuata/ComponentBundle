@@ -25,34 +25,27 @@
 
 namespace Thuata\ComponentBundle\Command;
 
-use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 
 /**
- * <b>OutputCommand</b><br>
+ * <b>ListenerCommand</b><br>
  *
  *
- * @package Thuata\ComponentBundle\Command
+ * @package thuata\componentbundle\Command
  *
  * @author  Anthony Maudry <anthony.maudry@thuata.com>
  */
-class OutputCommand extends ContainerAwareCommand
+abstract class RunListenerCommand extends ListenerCommand
 {
     use ThuataCommandTrait;
-    const COMMAND_NAME = 'thuata:output';
-    const COMMAND_DESCRIPTION = 'Opens an output socket in with you can write with OutputCommand::write static method.';
     const COMMAND_HELP = <<<EOT
-Without the --send option this command allows you to open an output socket in witch you will be able to write.
-With the --send option, you will send a message to a previously launched command.
+This command allows you to open an output socket in witch you will be able to send a message.
 EOT;
     const OPTION_PORT = 'port';
     const OPTION_SHORTCUT_PORT = 'p';
     const OPTION_DESC_PORT = 'The port to listen. Not relevant if send option is specified.';
-    const OPTION_SEND = 'send';
-    const OPTION_SHORTCUT_SEND = 's';
-    const OPTION_DESC_SEND = 'Sends a message to the %s command.';
     const OPTION_HOST = 'host';
     const OPTION_SHORTCUT_HOST = 'l';
     const OPTION_DESC_HOST = 'The host to listen.0.0.0.0 for all hosts. Relevant only if send option is not specified.';
@@ -61,18 +54,19 @@ EOT;
     const WELCOME_SEND = 'Will <fg=yellow>send</> message <fg=cyan>%s</> to <fg=red>%s</> command';
     const DEFAULT_PORT = 8080;
     const DEFAULT_HOST = '0.0.0.0';
+    const MESSAGE_STOP = 'Received <fg=red>STOP</> command.';
+    const HOWTO_STOP = 'To stop listening send the message <fg=white;bg=blue>%s</>';
 
     /**
      * {@inheritdoc}
      */
     protected function configure()
     {
-        $this->setName(static::COMMAND_NAME)
-            ->setDescription(static::COMMAND_DESCRIPTION)
+        $this->setName($this->getCommandName())
+            ->setDescription($this->getCommandDescription())
             ->addOption(self::OPTION_HOST, self::OPTION_SHORTCUT_HOST, InputOption::VALUE_OPTIONAL, self::OPTION_DESC_HOST, self::DEFAULT_HOST)
             ->addOption(self::OPTION_PORT, self::OPTION_SHORTCUT_PORT, InputOption::VALUE_OPTIONAL, self::OPTION_DESC_PORT, static::DEFAULT_PORT)
-            ->addOption(self::OPTION_SEND, self::OPTION_SHORTCUT_SEND, InputOption::VALUE_REQUIRED, sprintf(self::OPTION_DESC_SEND, $this->getName()))
-            ->setHelp(sprintf(self::COMMAND_HELP, get_class($this)));
+            ->setHelp(sprintf($this->getCommandHelp(), get_class($this)));
     }
 
     /**
@@ -82,50 +76,11 @@ EOT;
     {
         $this->writeThuataASCIILogo($output);
 
-        if ($input->getOption(self::OPTION_SEND)) {
-            $this->executeSend($input, $output);
-        } else {
-            $this->executeListen($input, $output);
-        }
+        $this->executeListen($input, $output);
 
         $this->writeGoodBy($output);
 
         return 0;
-    }
-
-    /**
-     * Gets the file path holding the port number
-     *
-     * @return string
-     */
-    private function getFilePath()
-    {
-
-        $tmpDir = realpath($this->getContainer()->get('kernel')->getRootDir() . '/../var/tmp/');
-        $fileName = '/' . str_replace(':', '--', $this->getName()) . '.sock';
-
-        if (!file_exists($tmpDir)) {
-            mkdir($tmpDir);
-        }
-
-        return $tmpDir . $fileName;
-    }
-
-    /**
-     * Execute send mode with send option
-     *
-     * @param \Symfony\Component\Console\Input\InputInterface   $input
-     * @param \Symfony\Component\Console\Output\OutputInterface $output
-     */
-    private function executeSend(InputInterface $input, OutputInterface $output)
-    {
-        $message = $input->getOption(self::OPTION_SEND);
-        $output->writeln(sprintf(self::WELCOME_SEND, $message, $this->getName()));
-
-        $port = file_get_contents($this->getFilePath());
-
-        $pingSock = socket_create(AF_INET, SOCK_DGRAM, SOL_UDP);
-        socket_sendto($pingSock, $message . PHP_EOL, strlen($message), 0, '127.0.0.1', $port);
     }
 
     /**
@@ -144,10 +99,16 @@ EOT;
         $sock = socket_create(AF_INET, SOCK_DGRAM, SOL_UDP);
         socket_bind($sock, $host, $port);
         $output->writeln(sprintf(self::START_LISTEN, $host, (string)$port));
+        $output->writeln(sprintf(self::HOWTO_STOP, static::getStopCommandMessage()));
 
         file_put_contents($this->getFilePath(), $port);
+
         while (true) {
             socket_recvfrom($sock, $message, 512, 0, $raddr, $rport);
+            if ($message === static::getStopCommandMessage()) {
+                $output->writeln(self::MESSAGE_STOP);
+                break;
+            }
             $this->treatMessage($message, $raddr, $rport, $output);
         }
         socket_close($sock);
@@ -161,8 +122,12 @@ EOT;
      * @param string                                            $remotePort
      * @param \Symfony\Component\Console\Output\OutputInterface $output
      */
-    protected function treatMessage($message, string $remoteAddress, string $remotePort, OutputInterface $output)
-    {
-        $output->writeln("Received message from $remoteAddress:$remotePort : " . $message);
-    }
+    abstract protected function treatMessage($message, string $remoteAddress, string $remotePort, OutputInterface $output);
+
+    /**
+     * Gets the message that launches the stop command
+     *
+     * @return string
+     */
+    abstract protected static function getStopCommandMessage() : string;
 }
