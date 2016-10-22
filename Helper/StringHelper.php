@@ -23,61 +23,35 @@
  * THE SOFTWARE.
  */
 
-namespace Thuata\ComponentBundle\Command;
+namespace Thuata\ComponentBundle\Helper;
 
-use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
+use Symfony\Component\VarDumper\VarDumper;
 
 /**
- * <b>ListenerCommand</b><br>
+ * <b>StringHelper</b><br>
  *
- * @package Thuata\ComponentBundle\Command
+ *
+ * @package Thuata\ComponentBundle\Helper
  *
  * @author  Anthony Maudry <anthony.maudry@thuata.com>
  */
-abstract class ListenerCommand extends ContainerAwareCommand
+class StringHelper
 {
     /**
-     * Gets the file path holding the port number
+     * Slugifies the string
+     *
+     * @param string   $string
+     * @param int|null $max
      *
      * @return string
      */
-    protected function getFilePath()
+    public static function slugify(string $string, int $max = null)
     {
-        $tmpDir = realpath($this->getContainer()->get('kernel')->getRootDir() . '/../var/tmp/');
-        $fileName = '/' . str_replace(':', '--', $this->getRunListeningCommandName()) . '.sock';
-
-        if (!file_exists($tmpDir)) {
-            mkdir($tmpDir);
+        if (function_exists('transliterator_transliterate')) {
+            return transliterator_transliterate("Any-Latin; NFD; [:Nonspacing Mark:] Remove; NFC; [:Punctuation:] Remove; Lower();", $string, null, $max);
         }
 
-        return $tmpDir . $fileName;
+        // todo slugify the hard way :)
+        return md5($string);
     }
-
-    /**
-     * Gets the command name
-     *
-     * @return string
-     */
-    abstract public function getCommandName() : string;
-
-    /**
-     * Gets the command description
-     *
-     * @return string
-     */
-    abstract public function getCommandDescription() : string;
-
-    /**
-     * Gets the run listener command name
-     *
-     * @return string
-     */
-    abstract protected function getRunListeningCommandName() : string;
-
-    /**
-     * Gets the help for the command
-     *
-     * @return string
-     */
-    abstract protected function getCommandHelp() : string;
 }
