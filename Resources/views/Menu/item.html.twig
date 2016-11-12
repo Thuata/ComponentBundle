@@ -1,0 +1,10 @@
+<li>
+    {{ include('ThuataComponentBundle:Menu:action.html.twig', {
+        'action' : item.action,
+    }) }}
+    {% if item.isSubmenu %}
+        {{ include('ThuataComponentBundle:Menu:itemlist.html.twig', {
+            'items' : item.children
+        }) }}
+    {% endif %}
+</li>
