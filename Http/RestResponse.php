@@ -6,6 +6,8 @@
  * Copyright 2014 Enjoy Your Business - RCS Bourges B 800 159 295 ©
  */
 namespace Thuata\ComponentBundle\Http;
+use JMS\Serializer\SerializationContext;
+use JMS\Serializer\SerializerBuilder;
 
 
 /**
@@ -51,6 +53,11 @@ class RestResponse implements \JsonSerializable
     private $errorMessage;
 
     /**
+     * @var array
+     */
+    private $groups;
+
+    /**
      * RestResponse constructor.
      *
      * @param bool   $success
@@ -58,8 +65,9 @@ class RestResponse implements \JsonSerializable
      * @param mixed  $data
      * @param mixed  $errorCode
      * @param string $errorMessage
+     * @param array  $groups
      */
-    public function __construct(bool $success, string $message = null, $data = null, $errorCode = null, string $errorMessage = null)
+    public function __construct(bool $success, string $message = null, $data = null, $errorCode = null, string $errorMessage = null, $groups = ['Default'])
     {
         $this->success = $success;
         $this->message = $message;
@@ -129,7 +137,11 @@ class RestResponse implements \JsonSerializable
             'success' => $this->success,
             'message' => $this->message,
             'error'   => $this->getError(),
-            'data'    => $this->data
+            'data'    => SerializerBuilder::create()->build()->serialize(
+                $this->data,
+                'json',
+                SerializationContext::create()->setGroups($this->groups)
+            ),
         ];
     }
 }
